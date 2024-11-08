@@ -11,7 +11,9 @@ import { StatusBar } from "expo-status-bar";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import Card from "../components/Card";
-import AntDesign from '@expo/vector-icons/AntDesign';
+import AntDesign from "@expo/vector-icons/AntDesign";
+import DetailsCard from "../components/DetailsCard";
+import AttendanceCard from "../components/AttendanceCard";
 
 export default function HomeScreen() {
   return (
@@ -23,16 +25,14 @@ export default function HomeScreen() {
       >
         <View style={styles.header}>
           <View style={styles.headerLeft}></View>
-          <View style={styles.headerRight}>
-            <View style={styles.overlay} />
+          <TouchableOpacity style={styles.headerRight}>
             <View>
               <View style={styles.icon}>
-                <View style={styles.overlay} />
-                <Ionicons name="person-outline" size={15} color="white" />
+                <Ionicons name="person-outline" size={16} color="white" />
               </View>
             </View>
             <Text style={styles.headerName}>Kattapana Estate</Text>
-          </View>
+          </TouchableOpacity>
         </View>
         <LinearGradient
           colors={["#1C3521", "#337341"]}
@@ -54,7 +54,8 @@ export default function HomeScreen() {
                 <Text style={styles.innerCardHeaderText}>Employees</Text>
               </View>
               <Text style={styles.totalAttentance}>
-                868 <Text style={{ fontSize: 12 }}>Total</Text>
+                868{" "}
+                <Text style={{ fontSize: 12, fontWeight: "500" }}>Total</Text>
               </Text>
               <View style={styles.attentanceContainer}>
                 <View style={styles.presentContainer}>
@@ -76,25 +77,79 @@ export default function HomeScreen() {
               <TouchableOpacity style={styles.innerCardButton}>
                 <View style={styles.transactionsButton}>
                   <Text style={styles.buttonText}>Transactions</Text>
-                  <AntDesign name="arrowright" size={18} color="black" />
+                  <AntDesign name="arrowright" size={18} color="#575551" />
                 </View>
               </TouchableOpacity>
             </View>
           </View>
         </LinearGradient>
       </LinearGradient>
-      <ScrollView style={styles.scrollSection}>
+      <ScrollView contentContainerStyle={styles.scrollSection}>
         <View style={styles.scrollHeader}>
           <View style={styles.row1}>
-            <Card text='Attentance' iconName='calendar-outline'/>
-            <Card text='Emp transfer' iconName="person-outline"/>
-            <Card text='Receive Products' iconName="receipt-outline"/>
+            <Card text="Attendance" iconName="calendar-outline" />
+            <Card text="Emp transfer" iconName="person-outline" />
+            <Card text="Receive Products" iconName="receipt-outline" />
           </View>
           <View style={styles.row2}>
-            <Card text="Petty cash" iconName="cash-outline"/>
-            <Card text="Leave request" iconName="cash-outline"/>
-            <Card text="Trip" iconName="car-outline"/>
+            <Card text="Petty cash" iconName="cash-outline" />
+            <Card text="Leave request" iconName="cash-outline" />
+            <Card text="Trip" iconName="car-outline" />
           </View>
+        </View>
+        <View style={styles.detailsContainer}>
+          <View style={styles.detailsRow}>
+            <Text style={styles.detailsText}>Harvesting Details</Text>
+            <TouchableOpacity>
+              <Text style={styles.viewMoreText}>View more</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.detailsRow1}>
+            <DetailsCard unit="3260kg" itemName="Cardamom" />
+            <DetailsCard unit="326kg" itemName="Pepper" />
+          </View>
+          <View style={styles.detailsRow1}>
+            <DetailsCard unit="260kg" itemName="Clove" />
+            <DetailsCard unit="320kg" itemName="Pepper" />
+          </View>
+        </View>
+        <View style={styles.attendanceContainer}>
+          <View style={styles.attendanceRow}>
+            <Text style={styles.detailsText}>Today’s Attendance</Text>
+            <TouchableOpacity>
+              <Text style={styles.viewMoreText}>View more</Text>
+            </TouchableOpacity>
+          </View>
+          <AttendanceCard
+            number="01"
+            employee="Frances Swann"
+            currentStatus="Absent"
+          />
+          <AttendanceCard
+            number="02"
+            employee="Sourav Ramesh"
+            currentStatus="Present"
+          />
+          <AttendanceCard
+            number="03"
+            employee="Frances Swann"
+            currentStatus="Present"
+          />
+          <AttendanceCard
+            number="04"
+            employee="Frances Swann"
+            currentStatus="Present"
+          />
+          <AttendanceCard
+            number="05"
+            employee="Frances Swann"
+            currentStatus="Absent"
+          />
+          <AttendanceCard
+            number="06"
+            employee="Frances Swann"
+            currentStatus="Present"
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -104,43 +159,35 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#FFFEFC",
   },
   headerSection: {
-    height: 300,
-    padding: 22,
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
+    padding: 16,
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 25,
+    marginBottom: 20,
   },
   headerLeft: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
     borderRadius: 50,
     width: 81,
     height: 32,
-    opacity: 0.3,
   },
   headerRight: {
     flexDirection: "row",
-    backgroundColor: "#FFFFFF",
-    borderRadius: 50,
-    padding: 5,
     alignItems: "center",
-  },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    zIndex: 0,
-    borderRadius: 50,
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    borderRadius: 20,
+    paddingVertical: 6,
+    paddingLeft: 6,
+    paddingRight: 14,
   },
   icon: {
-    backgroundColor: "#CCC",
-    borderRadius: 50,
+    backgroundColor: "rgba(255, 255, 255, 0.4)",
+    borderRadius: 30,
     padding: 5,
   },
   headerName: {
@@ -149,7 +196,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   headerCard: {
-    borderRadius: 30,
+    borderRadius: 16,
     padding: 16,
   },
   cardRow: {
@@ -174,11 +221,13 @@ const styles = StyleSheet.create({
   },
   innerCard: {
     padding: 16,
-    borderRadius: 16,
+    borderRadius: 8,
     justifyContent: "space-between",
     backgroundColor: "#F1F9EA1A",
     height: 188,
     flex: 1,
+    borderColor: "#F1F9EA1A",
+    borderWidth: 1,
   },
   innerCardHeader: {
     flexDirection: "row",
@@ -187,42 +236,47 @@ const styles = StyleSheet.create({
   innerCardHeaderText: {
     color: "#FFFFFF",
     marginLeft: 10,
+    fontWeight: "500",
+    fontSize: 14,
   },
   innerCardButton: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#FFFCF1",
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderRadius: 2,
   },
   transactionsButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
     marginRight: 5,
     fontSize: 12,
+    color: "#575551",
   },
   totalAttentance: {
     color: "#FFFFFF",
     fontSize: 24,
-    borderBottomWidth: 0.5,
-    borderBottomColor: "#ccc",
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(255, 255, 255, 0.2)",
     paddingBottom: 15,
+    fontWeight: "700",
   },
   attentanceContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
   presentContainer: {
-    borderRightWidth: 0.5,
-    borderRightColor: "#ccc",
+    borderRightWidth: 1,
+    borderRightColor: "rgba(255, 255, 255, 0.2)",
     paddingRight: 20,
     borderRightHeight: 5,
   },
   attentanceNumber: {
     color: "#FFFFFF",
     fontSize: 18,
+    fontWeight: "700",
   },
   attentanceText: {
     color: "#FFFFFF",
@@ -231,20 +285,45 @@ const styles = StyleSheet.create({
   walletText: {
     color: "#FFFFFF",
     fontSize: 24,
+    fontWeight: "700",
   },
   scrollSection: {
-    flex: 1,
     padding: 16,
+    gap: 25,
   },
-  scrollHeader: {
-    marginTop: 35,
-  },
+  scrollHeader: {},
   row1: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginBottom: 15,
   },
   row2: {
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  detailsContainer: {
+    gap: 12,
+  },
+  detailsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  detailsText: {
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  viewMoreText: {
+    color: "#ECBC2A",
+    fontWeight: "500",
+  },
+  detailsRow1: {
+    flexDirection: "row",
+    gap: 10,
+  },
+  attendanceContainer: {},
+  attendanceRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 15,
   },
 });
