@@ -4,6 +4,8 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  ImageBackground,
+  Dimensions,
 } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -15,75 +17,85 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import DetailsCard from "../components/DetailsCard";
 import AttendanceCard from "../components/AttendanceCard";
 
+const { width } = Dimensions.get("window");
+
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#15331C" style="light" />
-      <LinearGradient
+      {/* <LinearGradient
         colors={["#15331C", "#51B666"]}
-        style={styles.headerSection}
-      >
-        <View style={styles.header}>
-          <View style={styles.headerLeft}></View>
-          <TouchableOpacity style={styles.headerRight}>
-            <View>
-              <View style={styles.icon}>
-                <Ionicons name="person-outline" size={16} color="white" />
-              </View>
-            </View>
-            <Text style={styles.headerName}>Kattapana Estate</Text>
-          </TouchableOpacity>
-        </View>
-        <LinearGradient
-          colors={["#1C3521", "#337341"]}
-          start={[0, 0.5]}
-          end={[1, 0.5]}
-          style={styles.headerCard}
+        style={styles.background}
+      > */}
+      <View style={styles.headerContainer}>
+        <ImageBackground
+          source={require("../../assets/images/Vector.png")} // Replace with your vector image path
+          resizeMode="cover"
+          style={styles.background}
         >
-          <View style={styles.cardRow}>
-            <Ionicons name="calendar" size={20} color="#FFFFFF" />
-            <View style={styles.cardDate}>
-              <Text style={styles.dateText}>January 23, 2024</Text>
-              <Text style={styles.dateText}>Monday</Text>
-            </View>
+          <View style={styles.header}>
+            <View style={styles.headerLeft}></View>
+            <TouchableOpacity style={styles.headerRight}>
+              <View>
+                <View style={styles.icon}>
+                  <Ionicons name="person-outline" size={16} color="white" />
+                </View>
+              </View>
+              <Text style={styles.headerName}>Kattapana Estate</Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.innerCardContainer}>
-            <View style={styles.innerCard}>
-              <View style={styles.innerCardHeader}>
-                <Ionicons name="people-outline" size={24} color="#F0DA73" />
-                <Text style={styles.innerCardHeaderText}>Employees</Text>
-              </View>
-              <Text style={styles.totalAttentance}>
-                868{" "}
-                <Text style={{ fontSize: 12, fontWeight: "500" }}>Total</Text>
-              </Text>
-              <View style={styles.attentanceContainer}>
-                <View style={styles.presentContainer}>
-                  <Text style={styles.attentanceNumber}>800</Text>
-                  <Text style={styles.attentanceText}>Present</Text>
-                </View>
-                <View>
-                  <Text style={styles.attentanceNumber}>68</Text>
-                  <Text style={styles.attentanceText}>Absent</Text>
-                </View>
+          <LinearGradient
+            colors={["#1C3521", "#337341"]}
+            start={[0, 0.5]}
+            end={[1, 0.5]}
+            style={styles.headerCard}
+          >
+            <View style={styles.cardRow}>
+              <Ionicons name="calendar" size={20} color="#FFFFFF" />
+              <View style={styles.cardDate}>
+                <Text style={styles.dateText}>January 23, 2024</Text>
+                <Text style={styles.dateText}>Monday</Text>
               </View>
             </View>
-            <View style={styles.innerCard}>
-              <View style={styles.innerCardHeader}>
-                <Ionicons name="wallet-outline" size={24} color="#F0DA73" />
-                <Text style={styles.innerCardHeaderText}>Wallet balance</Text>
-              </View>
-              <Text style={styles.walletText}>₹1,0000</Text>
-              <TouchableOpacity style={styles.innerCardButton}>
-                <View style={styles.transactionsButton}>
-                  <Text style={styles.buttonText}>Transactions</Text>
-                  <AntDesign name="arrowright" size={18} color="#575551" />
+            <View style={styles.innerCardContainer}>
+              <View style={styles.innerCard}>
+                <View style={styles.innerCardHeader}>
+                  <Ionicons name="people-outline" size={24} color="#F0DA73" />
+                  <Text style={styles.innerCardHeaderText}>Employees</Text>
                 </View>
-              </TouchableOpacity>
+                <Text style={styles.totalAttentance}>
+                  868{" "}
+                  <Text style={{ fontSize: 12, fontWeight: "500" }}>Total</Text>
+                </Text>
+                <View style={styles.attentanceContainer}>
+                  <View style={styles.presentContainer}>
+                    <Text style={styles.attentanceNumber}>800</Text>
+                    <Text style={styles.attentanceText}>Present</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.attentanceNumber}>68</Text>
+                    <Text style={styles.attentanceText}>Absent</Text>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.innerCard}>
+                <View style={styles.innerCardHeader}>
+                  <Ionicons name="wallet-outline" size={24} color="#F0DA73" />
+                  <Text style={styles.innerCardHeaderText}>Wallet balance</Text>
+                </View>
+                <Text style={styles.walletText}>₹1,08568</Text>
+                <TouchableOpacity style={styles.innerCardButton}>
+                  <View style={styles.transactionsButton}>
+                    <Text style={styles.buttonText}>Transactions</Text>
+                    <AntDesign name="arrowright" size={18} color="#575551" />
+                  </View>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </LinearGradient>
-      </LinearGradient>
+          </LinearGradient>
+        </ImageBackground>
+      </View>
+      {/* </LinearGradient> */}
       <ScrollView contentContainerStyle={styles.scrollSection}>
         <View style={styles.scrollHeader}>
           <View style={styles.row1}>
@@ -161,7 +173,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFFEFC",
   },
-  headerSection: {
+  headerContainer: {
+    position: "relative",
+    height: 350,
+    backgroundColor: "#FFFEFC",
+  },
+  background: {
+    width: width,
+    height: 300, 
+    backgroundColor: "#15331C", 
+    borderBottomLeftRadius: 60, 
+    borderBottomRightRadius: 60,
     padding: 16,
   },
   header: {
@@ -198,6 +220,16 @@ const styles = StyleSheet.create({
   headerCard: {
     borderRadius: 16,
     padding: 16,
+    position: "absolute",
+    top: 80, 
+    left: 20,
+    right: 20,
+    elevation: 8, // Android shadow
+    shadowColor: "#000", // iOS shadow
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    zIndex: 1,
   },
   cardRow: {
     flexDirection: "row",
